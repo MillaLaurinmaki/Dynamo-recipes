@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const { query } = require("express");
 dotenv.config();
 const { Pool } = require("pg");
 const pool = new Pool({
@@ -11,8 +10,6 @@ const pool = new Pool({
 });
 
 async function readRecipes(recipes) {
-  const res = await pool.query(`SELECT * FROM recipes`);
+  const res = await pool.query(`SELECT * FROM recipes WHERE`);
   return res.rows;
 }
-
-readRecipes();
