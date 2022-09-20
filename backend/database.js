@@ -53,11 +53,18 @@ async function deleteRecipe(id) {
   return;
 }
 
-async function favoriteToggle(id) {
-  await pool.query(`UPDATE recipes set "isFavorite" = true WHERE id = $1;`, [
-    id,
-  ]);
-  return;
+async function favoriteToggle(id, recipes) {
+  if (recipes.isFavorite === false) {
+    await pool.query(`UPDATE recipes set "isFavorite" = true WHERE id = $1;`, [
+      id,
+    ]);
+    return;
+  } else {
+    await pool.query(`UPDATE recipes set "isFavorite" = false WHERE id = $1;`, [
+      id,
+    ]);
+    return;
+  }
 }
 
 // async function main() {

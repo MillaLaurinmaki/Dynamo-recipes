@@ -34,7 +34,7 @@ app.put("/recipes/:id", async (req, res) => {
 
 app.put("/recipes/toggle-favorite/:id", async (req, res) => {
   const id = req.params.id;
-  res.json(await favoriteToggle(id));
+  res.json(await favoriteToggle(id), req.body);
 });
 
 app.delete("/recipes/:id", async (req, res) => {
