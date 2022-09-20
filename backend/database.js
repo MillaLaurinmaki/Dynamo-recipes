@@ -21,7 +21,7 @@ async function readRecipe(id) {
 async function updateRecipe(id, recipes) {
   await pool.query(
     `UPDATE recipes SET author = $1, date = $2, header = $3, recipe = $4,
-  imgurl = $5, isfavorite = $6 WHERE = $7`,
+  imgurl = $5, isfavorite = $6 WHERE id = $7`,
     [
       recipes.author,
       recipes.date,
@@ -29,7 +29,7 @@ async function updateRecipe(id, recipes) {
       recipes.recipe,
       recipes.imgurl,
       recipes.isfavorite,
-      recipes.id,
+      id,
     ]
   );
 }
