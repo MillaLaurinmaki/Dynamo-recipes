@@ -5,8 +5,9 @@ const port = process.env.PORT || 3000;
 const {
   createRecipes,
   readRecipes,
-  updateRecipes,
-  deleteRecipes,
+  readRecipe,
+  updateRecipe,
+  deleteRecipe,
 } = require("./database");
 
 app.use(cors());
