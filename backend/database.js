@@ -11,12 +11,12 @@ const pool = new Pool({
 
 async function readRecipes() {
   const res = await pool.query(`SELECT * FROM recipes;`);
-  console.log(res.rows);
+  return res.rows;
 }
 
 async function readRecipe(id) {
   const res = await pool.query(`SELECT * FROM recipes WHERE id = $1;`, [id]);
-  console.log(res.rows[0]);
+  return res.rows[0];
 }
 async function updateRecipe(id, recipes) {
   await pool.query(
