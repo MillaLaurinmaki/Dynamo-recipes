@@ -53,6 +53,13 @@ async function deleteRecipe(id) {
   return;
 }
 
+async function favoriteToggle(id) {
+  await pool.query(`UPDATE recipes set "isFavorite" = true WHERE id = $1;`, [
+    id,
+  ]);
+  return;
+}
+
 // async function main() {
 //   console.log(await readRecipes());
 //   // await deleteRecipe();
@@ -68,4 +75,5 @@ module.exports = {
   createRecipes,
   updateRecipe,
   deleteRecipe,
+  favoriteToggle,
 };

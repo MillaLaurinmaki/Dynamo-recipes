@@ -8,6 +8,7 @@ const {
   readRecipe,
   updateRecipe,
   deleteRecipe,
+  favoriteToggle,
 } = require("./database");
 
 app.use(cors());
@@ -29,6 +30,11 @@ app.post("/recipes", async (req, res) => {
 app.put("/recipes/:id", async (req, res) => {
   const id = req.params.id;
   res.json(await updateRecipe(id, req.body));
+});
+
+app.put("/recipes/toggle-favorite/:id", async (req, res) => {
+  const id = req.params.id;
+  res.json(await favoriteToggle(id));
 });
 
 app.delete("/recipes/:id", async (req, res) => {
