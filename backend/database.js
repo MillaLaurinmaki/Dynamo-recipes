@@ -18,35 +18,25 @@ async function readRecipe(id) {
   const res = await pool.query(`SELECT * FROM recipes WHERE id = $1;`, [id]);
   console.log(res.rows[0]);
 }
-async function updateRecipe(id) {
-  const res = await pool.query(`SELECT * FROM recipes;`);
-  console.log(res.rows);
-}
-async function createRecipes(
-  author,
-  date,
-  header,
-  recipe,
-  imgurl,
-  favourite,
-) {
+async function updateRecipe(id, recipes) {
   await pool.query(
-    `INSERT INTO recipes(id, author, date, header, recipe, imgurl, favourite) VALUES ($1, $2, $3, $4, $5, $6);`[ 
-      author,
-      date,
-      header,
-      recipe,
-      imgurl,
-      favourite, ]
+    `UPDATE recipes SET author = $1, date = $2, header = $3, recipe = $4,
+  imgurl = $5, favourite = $6`,
+    [author, date, header, recipe, imgurl, favourite]
+  );
+}
+async function createRecipes(recipes) {
+  await pool.query(
+    `INSERT INTO recipes(id, author, date, header, recipe, imgurl, favourite) VALUES ($1, $2, $3, $4, $5, $6);`,
+    [author, date, header, recipe, imgurl, favourite]
   );
   return;
 }
 
 async function deleteRecipe(id) {
-await pool.query(`DELETE FROM recipes WHERE id = $1;` [id]);
-return (res.rows);
+  await pool.query(`DELETE FROM recipes WHERE id = $1;`[id]);
+  return res.rows;
 }
-
 
 async function main() {
   console.log(await readRecipes());
@@ -57,10 +47,10 @@ async function main() {
 }
 main();
 
-module.exports{
+module.exports = {
   readRecipes,
   readRecipe,
-  createRecipes, 
+  createRecipes,
   updateRecipe,
   deleteRecipe,
-}
+};
