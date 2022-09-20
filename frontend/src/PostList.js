@@ -72,7 +72,7 @@ const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 const persistToggleRecipe = async (apiUrl, id) => {
   await fetch(apiUrl + "/toggle-favorite/" + id, {
-    method: "POST",
+    method: "PUT",
   });
 };
 
