@@ -14,12 +14,12 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/recipes", async (req, res) => {
-  res.json(await readRecipes());
+  res.json({ data: await readRecipes() });
 });
 
 app.get("/recipes/:id", async (req, res) => {
   const id = req.params.id;
-  res.json(await readRecipe(id));
+  res.json({ data: await readRecipe(id) });
 });
 
 app.post("/recipes", async (req, res) => {

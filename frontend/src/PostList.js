@@ -98,7 +98,7 @@ const useRecipes = () => {
   });
   React.useEffect(() => {
     if (data) {
-      setRecipes(data);
+      setRecipes(data.data);
       console.log(data);
     }
   }, [data, apiUrl]);
@@ -174,8 +174,8 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
               author={recipe.author}
               date={recipe.date}
               id={recipe.id}
-              imageUrl={recipe.imageurl}
-              isFavorite={recipe.isfavorite}
+              imageUrl={recipe.imageUrl}
+              isFavorite={recipe.isFavorite}
               intro={recipe.intro}
               handleToggleFavorite={request.handleToggleFavorite}
               handleDelete={request.handleDelete}
