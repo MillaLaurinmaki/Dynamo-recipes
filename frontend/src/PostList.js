@@ -77,7 +77,7 @@ const persistToggleRecipe = async (apiUrl, id) => {
 };
 
 const persistDeleteRequest = async (apiUrl, id) => {
-  await fetch(apiUrl + "/recipe/" + id, {
+  await fetch(apiUrl + "/" + id, {
     method: "DELETE",
   });
 };
