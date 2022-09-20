@@ -70,9 +70,11 @@ const getMockedPosts = async () => {
 
 const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
-const persistToggleRecipe = async (apiUrl, id) => {
+const persistToggleRecipe = async (apiUrl, id, recipe) => {
   await fetch(apiUrl + "/toggle-favorite/" + id, {
     method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(recipe),
   });
 };
 
@@ -112,7 +114,7 @@ const useRecipes = () => {
       const recipe = newRecipes.find((recipe) => recipe.id === id);
       recipe.isFavorite = !recipe.isFavorite;
       setRecipes(newRecipes);
-      persistToggleRecipe(apiUrl, id);
+      persistToggleRecipe(apiUrl, id, recipe);
     },
     handleDelete: (id) => {
       const newRecipes = clone(recipes);

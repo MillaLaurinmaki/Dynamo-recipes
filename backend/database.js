@@ -53,8 +53,30 @@ async function deleteRecipe(id) {
   return;
 }
 
-async function favoriteToggle(id, recipes) {
-  if (recipes.isFavorite === false) {
+// async function favoriteToggle(id) {
+//   // console.log(recipes.isFavorite);
+//   const res = await pool.query(
+//     `SELECT "isFavorite" from recipes WHERE id = $1`,
+//     [id]
+//   );
+//   const resValues = Object.values(res.rows[0]);
+//   console.log(resValues[0]);
+//   if (test[0] === false) {
+//     await pool.query(`UPDATE recipes set "isFavorite" = true WHERE id = $1;`, [
+//       id,
+//     ]);
+//     return;
+//   } else {
+//     await pool.query(`UPDATE recipes set "isFavorite" = false WHERE id = $1;`, [
+//       id,
+//     ]);
+//     return;
+//   }
+// }
+
+async function favoriteToggle(id, recipe) {
+  // console.log(recipe.isFavorite);
+  if (recipe.isFavorite === true) {
     await pool.query(`UPDATE recipes set "isFavorite" = true WHERE id = $1;`, [
       id,
     ]);
