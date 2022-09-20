@@ -26,6 +26,15 @@ app.post("/recipes", async (req, res) => {
   res.json(await createRecipes(req.body));
 });
 
+app.put("/recipes/:id", async (req, res) => {
+  const id = req.params.id;
+  res.json(await updateRecipe(id, req.body));
+});
+
+app.delete("/recipes/:id", async (req, res) => {
+  const id = req.params.id;
+  res.json(await deleteRecipe(id));
+});
 //---
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
