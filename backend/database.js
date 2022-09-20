@@ -21,28 +21,28 @@ async function readRecipe(id) {
 async function updateRecipe(id, recipes) {
   await pool.query(
     `UPDATE recipes SET author = $1, date = $2, header = $3, recipe = $4,
-  imgurl = $5, isfavorite = $6 WHERE id = $7`,
+  "imageUrl" = $5, "isFavorite" = $6 WHERE id = $7`,
     [
       recipes.author,
       recipes.date,
       recipes.header,
       recipes.recipe,
-      recipes.imgurl,
-      recipes.isfavorite,
+      recipes.imageUrl,
+      recipes.isFavorite,
       id,
     ]
   );
 }
 async function createRecipes(recipes) {
   await pool.query(
-    `INSERT INTO recipes(author, date, header, recipe, imgurl, isfavorite) VALUES ($1, $2, $3, $4, $5, $6);`,
+    `INSERT INTO recipes(author, date, header, recipe, "imageUrl", "isFavorite") VALUES ($1, $2, $3, $4, $5, $6);`,
     [
       recipes.author,
       recipes.date,
       recipes.header,
       recipes.recipe,
-      recipes.imgurl,
-      recipes.isfavorite,
+      recipes.imageUrl,
+      recipes.isFavorite,
     ]
   );
   return;
