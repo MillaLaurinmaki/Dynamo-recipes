@@ -1,12 +1,12 @@
-import React from 'react';
-import Card from './Card';
-import Stack from '@mui/material/Stack';
-import { ApiUrlContext } from './App';
-import { fetcher } from './useApi';
-import useSWRImmutable from 'swr/immutable';
-import CircularProgress from '@mui/material/CircularProgress';
-import { Box, Alert } from '@mui/material';
-import CreateRecipe from './CreateRecipe';
+import React from "react";
+import Card from "./Card";
+import Stack from "@mui/material/Stack";
+import { ApiUrlContext } from "./App";
+import { fetcher } from "./useApi";
+import useSWRImmutable from "swr/immutable";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Box, Alert } from "@mui/material";
+import CreateRecipe from "./CreateRecipe";
 
 let postId = 0;
 const getId = () => ++postId;
@@ -19,37 +19,37 @@ const getRandomImageUrl = async () => {
 const mockedPosts = [
   {
     id: getId(),
-    header: 'Kermainen kanapasta',
-    recipe: 'Lorem ipsum i dolor sit amet',
-    author: 'alex',
-    date: '20.06.2022',
+    header: "Kermainen kanapasta",
+    recipe: "Lorem ipsum i dolor sit amet",
+    author: "alex",
+    date: "20.06.2022",
     imageUrl: `https://source.unsplash.com/random/?sig=1/&chicken,pasta`,
     isFavorite: false,
   },
   {
     id: getId(),
-    header: 'Lasagne',
-    recipe: 'Lorem ipsum i dolor sit amet',
-    author: 'alex',
-    date: '20.06.2022',
+    header: "Lasagne",
+    recipe: "Lorem ipsum i dolor sit amet",
+    author: "alex",
+    date: "20.06.2022",
     imageUrl: `https://source.unsplash.com/random/?sig=2/&cooking,lasagne`,
     isFavorite: false,
   },
   {
     id: getId(),
-    header: 'Hampurilainen',
-    recipe: 'Lorem ipsum i dolor sit amet',
-    author: 'alex',
-    date: '20.06.2022',
+    header: "Hampurilainen",
+    recipe: "Lorem ipsum i dolor sit amet",
+    author: "alex",
+    date: "20.06.2022",
     imageUrl: `https://source.unsplash.com/random/?sig=3/&hamburger`,
     isFavorite: false,
   },
   {
     id: getId(),
-    header: 'Kebab',
-    recipe: 'Lorem ipsum i dolor sit amet',
-    author: 'alex',
-    date: '20.06.2022',
+    header: "Kebab",
+    recipe: "Lorem ipsum i dolor sit amet",
+    author: "alex",
+    date: "20.06.2022",
     imageUrl: `https://source.unsplash.com/random/?sig=4/&kebab`,
     isFavorite: false,
   },
@@ -71,20 +71,20 @@ const getMockedPosts = async () => {
 const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 const persistToggleRecipe = async (apiUrl, id) => {
-  await fetch(apiUrl + '/toggle-favorite/' + id, {
-    method: 'POST',
+  await fetch(apiUrl + "/toggle-favorite/" + id, {
+    method: "POST",
   });
 };
 
 const persistDeleteRequest = async (apiUrl, id) => {
-  await fetch(apiUrl + '/recipe/' + id, {
-    method: 'DELETE',
+  await fetch(apiUrl + "/recipe/" + id, {
+    method: "DELETE",
   });
 };
 
 const persistRecipe = async (apiUrl, recipe) => {
-  await fetch(apiUrl + '/recipe', {
-    method: 'POST',
+  await fetch(apiUrl + "/recipe", {
+    method: "POST",
     body: JSON.stringify(recipe),
   });
 };
@@ -98,7 +98,8 @@ const useRecipes = () => {
   });
   React.useEffect(() => {
     if (data) {
-      setRecipes(data.data);
+      setRecipes(data);
+      console.log(data);
     }
   }, [data, apiUrl]);
   return {
@@ -126,7 +127,7 @@ const useRecipes = () => {
         header,
         recipe,
         author,
-        date: '20.06.2022',
+        date: "20.06.2022",
         imageUrl,
         isFavorite: false,
         intro,
@@ -146,6 +147,8 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
   if (request.isLoading) {
     return <CircularProgress />;
   }
+
+  // console.log(request.recipes);
   return (
     <>
       <CreateRecipe
@@ -171,8 +174,8 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
               author={recipe.author}
               date={recipe.date}
               id={recipe.id}
-              imageUrl={recipe.imageUrl}
-              isFavorite={recipe.isFavorite}
+              imageUrl={recipe.imageurl}
+              isFavorite={recipe.isfavorite}
               intro={recipe.intro}
               handleToggleFavorite={request.handleToggleFavorite}
               handleDelete={request.handleDelete}

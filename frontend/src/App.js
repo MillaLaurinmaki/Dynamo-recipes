@@ -1,16 +1,17 @@
-import React from 'react';
-import PostList from './PostList';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import React from "react";
+import PostList from "./PostList";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export const ApiUrlContext = React.createContext('localhost');
+export const ApiUrlContext = React.createContext("localhost");
 
-const defaultApiUrl = process.env.REACT_APP_API_URL;
+// const defaultApiUrl = process.env.REACT_APP_API_URL;
+const defaultApiUrl = "http://localhost:8080/recipes";
 
 function App() {
   const [apiUrl, setApiUrl] = React.useState(defaultApiUrl);
@@ -45,7 +46,7 @@ function App() {
           color="primary"
           aria-label="add"
           sx={{
-            position: 'fixed',
+            position: "fixed",
             bottom: 20,
             right: 20,
           }}
