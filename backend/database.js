@@ -53,14 +53,14 @@ async function deleteRecipe(id) {
   return res.rows;
 }
 
-async function main() {
-  console.log(await readRecipes());
-  // await deleteRecipe();
-  // await updateRecipe()
-  await createRecipes();
-  // await readRecipe()
-}
-main();
+// async function main() {
+//   console.log(await readRecipes());
+//   // await deleteRecipe();
+//   // await updateRecipe()
+//   await createRecipes();
+//   // await readRecipe()
+// }
+// main();
 
 module.exports = {
   readRecipes,
