@@ -50,7 +50,7 @@ async function createRecipes(recipes) {
 
 async function deleteRecipe(id) {
   await pool.query(`DELETE FROM recipes WHERE id = $1;`, [id]);
-  return res.rows;
+  return;
 }
 
 // async function main() {
