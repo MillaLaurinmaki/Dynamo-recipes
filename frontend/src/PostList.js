@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import { ApiUrlContext } from "./App";
 import { fetcher } from "./useApi";
 import useSWRImmutable from "swr/immutable";
@@ -143,6 +144,20 @@ const useRecipes = () => {
 };
 
 const PostList = ({ show, setShowNewRecipeDialog }) => {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  React.useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  // console.log(width);
+
   const handleClose = () => {
     setShowNewRecipeDialog(false);
   };
@@ -166,32 +181,61 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
           </Alert>
         </Box>
       ) : null}
-
-      <Stack spacing={2}>
-        {request.recipes.length !== 0 ? (
-          request.recipes.map((recipe) => {
-            return (
-              <Card
-                key={recipe.id + recipe.header}
-                title={recipe.header}
-                recipe={recipe.recipe}
-                author={recipe.author}
-                date={recipe.date}
-                id={recipe.id}
-                imageUrl={recipe.imageUrl}
-                isFavorite={recipe.isFavorite}
-                intro={recipe.intro}
-                handleToggleFavorite={request.handleToggleFavorite}
-                handleDelete={request.handleDelete}
-              />
-            );
-          })
-        ) : (
-          <div>
-            <p>No matching recipes found</p>
-          </div>
-        )}
-      </Stack>
+      {width >= 768 ? (
+        <Grid container spacing={2}>
+          {request.recipes.length !== 0 ? (
+            request.recipes.map((recipe) => {
+              return (
+                <Grid item xs={4}>
+                  <Card
+                    key={recipe.id + recipe.header}
+                    title={recipe.header}
+                    recipe={recipe.recipe}
+                    author={recipe.author}
+                    date={recipe.date}
+                    id={recipe.id}
+                    imageUrl={recipe.imageUrl}
+                    isFavorite={recipe.isFavorite}
+                    intro={recipe.intro}
+                    handleToggleFavorite={request.handleToggleFavorite}
+                    handleDelete={request.handleDelete}
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <div>
+              <p>No matching recipes found</p>
+            </div>
+          )}
+        </Grid>
+      ) : (
+        <Stack container spacing={2}>
+          {request.recipes.length !== 0 ? (
+            request.recipes.map((recipe) => {
+              return (
+                <Card
+                  key={recipe.id + recipe.header}
+                  title={recipe.header}
+                  recipe={recipe.recipe}
+                  author={recipe.author}
+                  date={recipe.date}
+                  id={recipe.id}
+                  imageUrl={recipe.imageUrl}
+                  isFavorite={recipe.isFavorite}
+                  intro={recipe.intro}
+                  handleToggleFavorite={request.handleToggleFavorite}
+                  handleDelete={request.handleDelete}
+                />
+              );
+            })
+          ) : (
+            <div>
+              <p>No matching recipes found</p>
+            </div>
+          )}
+        </Stack>
+      )}
     </>
   );
 };
