@@ -8,6 +8,22 @@ import Fab from "@mui/material/Fab";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ModeNight from "@mui/icons-material/ModeNight";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
 
 export const ApiUrlContext = React.createContext("localhost");
 
@@ -19,56 +35,71 @@ function App() {
   // const [apiUrlPrompt, setApiUrlPrompt] = React.useState(defaultApiUrl);
   const [showNewDialog, setShowNewDialog] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
+  const [theme, setTheme] = React.useState(lightTheme);
+
+  const toggleTheme = () => {
+    theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
+  };
 
   return (
-    <div className="App">
-      <Container fixed>
-        <Box display="flex" marginTop={1} marginBottom={1}>
-          <TextField
-            fullWidth
-            placeholder="Search for recipes"
-            value={searchValue}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-            }}
-          />
-          <IconButton
-            onClick={() =>
-              setApiUrl(`http://localhost:8080/recipes?search=${searchValue}`)
-            }
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-          <IconButton
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="App">
+        <Container fixed>
+          <Box display="flex" marginTop={1} marginBottom={1}>
+            <TextField
+              fullWidth
+              placeholder="Search for recipes"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+            <IconButton
+              onClick={() =>
+                setApiUrl(`http://localhost:8080/recipes?search=${searchValue}`)
+              }
+            >
+              <ArrowForwardIosIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setApiUrl(`http://localhost:8080/favorites`);
+              }}
+            >
+              <FavoriteBorder color="primary"></FavoriteBorder>
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                toggleTheme();
+              }}
+            >
+              <ModeNight color="primary"></ModeNight>
+            </IconButton>
+          </Box>
+          <ApiUrlContext.Provider value={apiUrl}>
+            <PostList
+              show={showNewDialog}
+              setShowNewRecipeDialog={setShowNewDialog}
+            />
+          </ApiUrlContext.Provider>
+          <Fab
             onClick={() => {
-              setApiUrl(`http://localhost:8080/favorites`);
+              setShowNewDialog(true);
+            }}
+            color="primary"
+            aria-label="add"
+            sx={{
+              position: "fixed",
+              bottom: 20,
+              right: 20,
             }}
           >
-            <FavoriteBorder color="primary"></FavoriteBorder>
-          </IconButton>
-        </Box>
-        <ApiUrlContext.Provider value={apiUrl}>
-          <PostList
-            show={showNewDialog}
-            setShowNewRecipeDialog={setShowNewDialog}
-          />
-        </ApiUrlContext.Provider>
-        <Fab
-          onClick={() => {
-            setShowNewDialog(true);
-          }}
-          color="primary"
-          aria-label="add"
-          sx={{
-            position: "fixed",
-            bottom: 20,
-            right: 20,
-          }}
-        >
-          <AddIcon />
-        </Fab>
-      </Container>
-    </div>
+            <AddIcon />
+          </Fab>
+        </Container>
+      </div>
+    </ThemeProvider>
   );
 }
 
