@@ -204,7 +204,7 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
               );
             })
           ) : (
-            <div>
+            <div style={{ marginLeft: 20, marginTop: 16 }}>
               <p>No matching recipes found</p>
             </div>
           )}
