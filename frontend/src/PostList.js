@@ -151,7 +151,7 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
     return <CircularProgress />;
   }
 
-  // console.log(request.recipes);
+  // console.log(request.recipes.length);
   return (
     <>
       <CreateRecipe
@@ -168,23 +168,29 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
       ) : null}
 
       <Stack spacing={2}>
-        {request.recipes.map((recipe) => {
-          return (
-            <Card
-              key={recipe.id + recipe.header}
-              title={recipe.header}
-              recipe={recipe.recipe}
-              author={recipe.author}
-              date={recipe.date}
-              id={recipe.id}
-              imageUrl={recipe.imageUrl}
-              isFavorite={recipe.isFavorite}
-              intro={recipe.intro}
-              handleToggleFavorite={request.handleToggleFavorite}
-              handleDelete={request.handleDelete}
-            />
-          );
-        })}
+        {request.recipes.length !== 0 ? (
+          request.recipes.map((recipe) => {
+            return (
+              <Card
+                key={recipe.id + recipe.header}
+                title={recipe.header}
+                recipe={recipe.recipe}
+                author={recipe.author}
+                date={recipe.date}
+                id={recipe.id}
+                imageUrl={recipe.imageUrl}
+                isFavorite={recipe.isFavorite}
+                intro={recipe.intro}
+                handleToggleFavorite={request.handleToggleFavorite}
+                handleDelete={request.handleDelete}
+              />
+            );
+          })
+        ) : (
+          <div>
+            <p>No matching recipes found</p>
+          </div>
+        )}
       </Stack>
     </>
   );
