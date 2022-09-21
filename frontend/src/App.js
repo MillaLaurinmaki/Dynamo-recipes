@@ -15,8 +15,9 @@ const defaultApiUrl = "http://localhost:8080/recipes";
 
 function App() {
   const [apiUrl, setApiUrl] = React.useState(defaultApiUrl);
-  const [apiUrlPrompt, setApiUrlPrompt] = React.useState(defaultApiUrl);
+  // const [apiUrlPrompt, setApiUrlPrompt] = React.useState(defaultApiUrl);
   const [showNewDialog, setShowNewDialog] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState("");
 
   return (
     <div className="App">
@@ -24,12 +25,16 @@ function App() {
         <Box display="flex" marginTop={1} marginBottom={1}>
           <TextField
             fullWidth
-            value={apiUrlPrompt}
+            value={searchValue}
             onChange={(e) => {
-              setApiUrlPrompt(e.target.value);
+              setSearchValue(e.target.value);
             }}
           />
-          <IconButton onClick={() => setApiUrl(apiUrlPrompt)}>
+          <IconButton
+            onClick={() =>
+              setApiUrl(`http://localhost:8080/recipes?search=${searchValue}`)
+            }
+          >
             <ArrowForwardIosIcon />
           </IconButton>
         </Box>

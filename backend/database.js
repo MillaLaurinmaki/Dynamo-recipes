@@ -53,6 +53,14 @@ async function deleteRecipe(id) {
   return;
 }
 
+async function searchRecipes(search) {
+  const res = await pool.query(
+    "SELECT * FROM recipes WHERE recipes.header LIKE $1",
+    [`%${search}%`]
+  );
+  return res.rows;
+}
+
 // async function favoriteToggle(id) {
 //   // console.log(recipes.isFavorite);
 //   const res = await pool.query(
@@ -105,4 +113,5 @@ module.exports = {
   updateRecipe,
   deleteRecipe,
   favoriteToggle,
+  searchRecipes,
 };

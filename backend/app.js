@@ -9,13 +9,18 @@ const {
   updateRecipe,
   deleteRecipe,
   favoriteToggle,
+  searchRecipes,
 } = require("./database");
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/recipes", async (req, res) => {
-  res.json({ data: await readRecipes() });
+  if (req.query.search) {
+    res.json({ data: await searchRecipes(req.query.search) });
+  } else {
+    res.json({ data: await readRecipes() });
+  }
 });
 
 app.get("/recipes/:id", async (req, res) => {

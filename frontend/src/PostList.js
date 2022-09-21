@@ -102,7 +102,7 @@ const useRecipes = () => {
   React.useEffect(() => {
     if (data) {
       setRecipes(data.data);
-      console.log(data);
+      // console.log(data);
     }
   }, [data, apiUrl]);
   return {
