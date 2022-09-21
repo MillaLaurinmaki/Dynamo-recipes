@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -36,6 +37,13 @@ function App() {
             }
           >
             <ArrowForwardIosIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              setApiUrl(`http://localhost:8080/favorites`);
+            }}
+          >
+            <FavoriteBorder color="primary"></FavoriteBorder>
           </IconButton>
         </Box>
         <ApiUrlContext.Provider value={apiUrl}>

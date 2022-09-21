@@ -61,6 +61,13 @@ async function searchRecipes(search) {
   return res.rows;
 }
 
+async function readFavoriteRecipes() {
+  const res = await pool.query(
+    `SELECT * FROM recipes WHERE "isFavorite" = true`
+  );
+  return res.rows;
+}
+
 // async function favoriteToggle(id) {
 //   // console.log(recipes.isFavorite);
 //   const res = await pool.query(
@@ -114,4 +121,5 @@ module.exports = {
   deleteRecipe,
   favoriteToggle,
   searchRecipes,
+  readFavoriteRecipes,
 };
