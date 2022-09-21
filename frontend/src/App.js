@@ -26,6 +26,7 @@ function App() {
         <Box display="flex" marginTop={1} marginBottom={1}>
           <TextField
             fullWidth
+            placeholder="Search for recipes"
             value={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value);

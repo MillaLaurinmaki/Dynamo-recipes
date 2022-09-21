@@ -55,8 +55,8 @@ async function deleteRecipe(id) {
 
 async function searchRecipes(search) {
   const res = await pool.query(
-    "SELECT * FROM recipes WHERE recipes.header LIKE $1",
-    [`%${search}%`]
+    "SELECT * FROM recipes WHERE recipes.header LIKE $1 OR recipes.header LIKE $2",
+    [`%${search}%`, `%${search.charAt(0).toUpperCase() + search.slice(1)}%`]
   );
   return res.rows;
 }
