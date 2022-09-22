@@ -72,25 +72,36 @@ const getMockedPosts = async () => {
 const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 const persistToggleRecipe = async (apiUrl, id, recipe) => {
-  await fetch(apiUrl + "/toggle-favorite/" + id, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(recipe),
-  });
+  await fetch(
+    `http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes/toggle-favorite/` +
+      id,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipe),
+    }
+  );
 };
 
 const persistDeleteRequest = async (apiUrl, id) => {
-  await fetch(apiUrl + "/" + id, {
-    method: "DELETE",
-  });
+  await fetch(
+    "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes/" +
+      id,
+    {
+      method: "DELETE",
+    }
+  );
 };
 
 const persistRecipe = async (apiUrl, recipe) => {
-  await fetch(apiUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(recipe),
-  });
+  await fetch(
+    "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipe),
+    }
+  );
 };
 
 const useRecipes = () => {
