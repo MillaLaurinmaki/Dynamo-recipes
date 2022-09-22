@@ -36,7 +36,7 @@ async function updateRecipe(id, recipes) {
 }
 async function createRecipes(recipes) {
   await pool.query(
-    `INSERT INTO recipes(author, date, header, recipe, "imageUrl", "isFavorite") VALUES ($1, $2, $3, $4, $5, $6, $7);`,
+    `INSERT INTO recipes(author, date, header, recipe, "imageUrl", "isFavorite", intro) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
     [
       recipes.author,
       recipes.date,
