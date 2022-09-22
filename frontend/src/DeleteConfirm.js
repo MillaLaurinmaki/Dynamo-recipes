@@ -6,17 +6,35 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function AlertDialog() {
-  const [open, setOpen] = React.useState(false);
+export default function AlertDialog({
+  recipeToBeDeleted,
+  setRecipeToBeDeleted,
+}) {
+  const persistDeleteRequest = async (id) => {
+    await fetch(
+      "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes/" +
+        id,
+      {
+        method: "DELETE",
+      }
+    );
+  };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCancel = () => {
+    setRecipeToBeDeleted(0);
+  };
+
+  const handleClose = async () => {
+    await persistDeleteRequest(recipeToBeDeleted);
+    setRecipeToBeDeleted(0);
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
   };
 
   return (
     <div>
       <Dialog
-        open={open}
+        open={recipeToBeDeleted !== 0}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -30,7 +48,7 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
           <Button onClick={handleClose} autoFocus>
             Delete
           </Button>

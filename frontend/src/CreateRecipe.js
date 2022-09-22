@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
 
 export default function CreateNewRecipeDialog({
   show,
@@ -39,7 +39,7 @@ export default function CreateNewRecipeDialog({
             inputRef={recipeRef}
             label="Recipe (supports markdown)"
             fullWidth
-            auto
+            // auto
             multiline
             minRows={4}
             sx={{ marginTop: 2 }}
@@ -73,7 +73,7 @@ export default function CreateNewRecipeDialog({
               if (
                 Object.values(newRecipe).some((value) => value.length === 0)
               ) {
-                alert('No empty values allowed');
+                alert("No empty values allowed");
                 return;
               }
               handleClose();

@@ -37,6 +37,7 @@ export default function RecipeReviewCard({
   intro,
   handleToggleFavorite,
   handleDelete,
+  setRecipeToBeDeleted,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -56,7 +57,8 @@ export default function RecipeReviewCard({
         action={
           <IconButton
             onClick={() => {
-              handleDelete(id);
+              setRecipeToBeDeleted(id);
+              // handleDelete(id);
             }}
           >
             <DeleteOutline />

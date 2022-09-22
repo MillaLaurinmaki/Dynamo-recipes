@@ -8,6 +8,7 @@ import useSWRImmutable from "swr/immutable";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box, Alert } from "@mui/material";
 import CreateRecipe from "./CreateRecipe";
+import DeleteConfirm from "./DeleteConfirm";
 
 let postId = 0;
 const getId = () => ++postId;
@@ -83,16 +84,6 @@ const persistToggleRecipe = async (apiUrl, id, recipe) => {
   );
 };
 
-const persistDeleteRequest = async (apiUrl, id) => {
-  await fetch(
-    "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes/" +
-      id,
-    {
-      method: "DELETE",
-    }
-  );
-};
-
 const persistRecipe = async (apiUrl, recipe) => {
   await fetch(
     "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes",
@@ -133,7 +124,7 @@ const useRecipes = () => {
       const recipeIndex = newRecipes.findIndex((recipe) => recipe.id === id);
       newRecipes.splice(recipeIndex, 1);
       setRecipes(newRecipes);
-      persistDeleteRequest(apiUrl, id);
+      //persistDeleteRequest(apiUrl, id);
     },
     handleAddRecipe: ({ header, intro, recipe, imageUrl, author }) => {
       const newRecipes = clone(recipes);
@@ -156,6 +147,7 @@ const useRecipes = () => {
 
 const PostList = ({ show, setShowNewRecipeDialog }) => {
   const [width, setWidth] = React.useState(window.innerWidth);
+  const [recipeToBeDeleted, setRecipeToBeDeleted] = React.useState(0);
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -180,6 +172,10 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
   // console.log(request.recipes.length);
   return (
     <>
+      <DeleteConfirm
+        recipeToBeDeleted={recipeToBeDeleted}
+        setRecipeToBeDeleted={setRecipeToBeDeleted}
+      />
       <CreateRecipe
         handleClose={handleClose}
         show={show}
@@ -209,6 +205,7 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
                     intro={recipe.intro}
                     handleToggleFavorite={request.handleToggleFavorite}
                     handleDelete={request.handleDelete}
+                    setRecipeToBeDeleted={setRecipeToBeDeleted}
                   />
                 </Grid>
               );
