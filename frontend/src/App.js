@@ -28,7 +28,8 @@ const lightTheme = createTheme({
 export const ApiUrlContext = React.createContext("localhost");
 
 // const defaultApiUrl = process.env.REACT_APP_API_URL;
-const defaultApiUrl = "http://localhost:8080/recipes";
+const defaultApiUrl =
+  "http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes";
 
 function App() {
   const [apiUrl, setApiUrl] = React.useState(defaultApiUrl);
@@ -57,14 +58,18 @@ function App() {
             />
             <IconButton
               onClick={() =>
-                setApiUrl(`http://localhost:8080/recipes?search=${searchValue}`)
+                setApiUrl(
+                  `http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/recipes?search=${searchValue}`
+                )
               }
             >
               <ArrowForwardIosIcon />
             </IconButton>
             <IconButton
               onClick={() => {
-                setApiUrl(`http://localhost:8080/favorites`);
+                setApiUrl(
+                  `http://group1recipebook-env.eba-qmv2vkx8.eu-west-1.elasticbeanstalk.com/favorites`
+                );
               }}
             >
               <FavoriteBorder color="primary"></FavoriteBorder>
