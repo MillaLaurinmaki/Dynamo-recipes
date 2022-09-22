@@ -186,9 +186,8 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
           {request.recipes.length !== 0 ? (
             request.recipes.map((recipe) => {
               return (
-                <Grid item xs={4}>
+                <Grid item xs={4} key={recipe.id + recipe.header}>
                   <Card
-                    key={recipe.id + recipe.header}
                     title={recipe.header}
                     recipe={recipe.recipe}
                     author={recipe.author}
@@ -210,7 +209,7 @@ const PostList = ({ show, setShowNewRecipeDialog }) => {
           )}
         </Grid>
       ) : (
-        <Stack container spacing={2}>
+        <Stack spacing={2}>
           {request.recipes.length !== 0 ? (
             request.recipes.map((recipe) => {
               return (
